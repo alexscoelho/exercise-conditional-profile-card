@@ -27,18 +27,28 @@ function render(variables = {}) {
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
-  if (variables.includeCover == false) cover = "<div class='cover'></div>";
+  if (variables.includeCover == false)
+    cover = `<div class="cover"><img src="https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" /></div>`;
 
   let name = variables.name || "";
   let lastname = variables.lastname || "";
   let role = variables.role || "";
   let country = variables.country || "";
   let city = variables.city || "";
-  let socialMediaPosition = variables.socialMediaPosition || "right";
   let github = variables.github || "";
   let twitter = variables.twitter || "";
   let linkedin = variables.linkedin || "";
   let instagram = variables.instagram || "";
+  let socialMedia = "";
+  if (variables.socialMediaPosition != null) {
+    let socialMediaPosition = variables.socialMediaPosition || "right";
+    socialMedia = `<ul class=${socialMediaPosition}>
+            <li><a href="https://twitter.com/${twitter}"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://github.com/${github}"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://linkedin.com/${linkedin}/"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="https://instagram.com/${instagram}"><i class="fa fa-instagram"></i></a></li>
+          </ul>`;
+  }
 
   let myProfileURL =
     "https://pickaface.net/gallery/avatar/unr_random_160817_0304_2mvqp69.png";
@@ -56,12 +66,7 @@ function render(variables = {}) {
           <h1>${name} ${lastname}</h1>
           <h2>${role}</h2>
           <h3>${country}, ${city}</h3>
-          <ul class=${socialMediaPosition}>
-            <li><a href="https://twitter.com/${twitter}"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://github.com/${github}"><i class="fa fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/${linkedin}/"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/${instagram}"><i class="fa fa-instagram"></i></a></li>
-          </ul>
+          ${socialMedia}
         </div>
     `;
 }
